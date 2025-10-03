@@ -1,8 +1,11 @@
-﻿namespace SystemHealthAPI.Exceptions
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace SystemHealthAPI.Exceptions
 {
     /// <summary>
     /// An exception thrown when there are no metrics available on the system.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class MetricsNotAvailableException: Exception
     {
         /// <summary>

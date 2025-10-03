@@ -1,8 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace SystemHealthAPI.Models;
 
 /// <summary>
 /// A model that represents any time-stamped OS metric.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class OSMetric()
 {
     /// <summary>

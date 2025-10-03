@@ -29,3 +29,5 @@ yarn-error.log*
 /src/SystemHealthAPI/.vs
 /src/SystemHealthAPI/bin
 /src/SystemHealthAPI/obj
+/src/SystemHealthAPITests/bin/Debug/net8.0
+/src/SystemHealthAPITests/obj
