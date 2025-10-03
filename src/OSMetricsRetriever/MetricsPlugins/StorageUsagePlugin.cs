@@ -1,6 +1,7 @@
 ﻿using OSMetricsRetriever.Exceptions;
 using OSMetricsRetriever.Models;
 using System.Management;
+using System.Linq;
 
 namespace OSMetricsRetriever.MetricsPlugins
 {
@@ -10,6 +11,7 @@ namespace OSMetricsRetriever.MetricsPlugins
     public class StorageUsagePlugin : IRetrieveMetricsPlugin
     {
         private static readonly string Key = "storage_usage_metric";
+        private static readonly string Name = "Storage Usage";
         private static readonly string Description = "The amount of storage space currently used on the primary drive.";
         
         private static readonly string WMIQueryString = "SELECT Size, FreeSpace FROM Win32_LogicalDisk WHERE DriveType = 3";
@@ -17,6 +19,11 @@ namespace OSMetricsRetriever.MetricsPlugins
 
         /// <inheritdoc/>
         public static readonly string Name = "Storage Usage";
+
+        public StorageUsagePlugin()
+        {
+            _WMIObjectQuery = new ObjectQuery(WMIQueryString);
+        }
 
         /// <inheritdoc/>
         public OSMetric GetMetric(ManagementScope scope)

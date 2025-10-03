@@ -1,6 +1,7 @@
 ﻿using OSMetricsRetriever.Exceptions;
 using OSMetricsRetriever.Models;
 using System.Management;
+using System.Linq;
 
 namespace OSMetricsRetriever.MetricsPlugins
 {
@@ -10,6 +11,7 @@ namespace OSMetricsRetriever.MetricsPlugins
     public class MemoryUsagePlugin : IRetrieveMetricsPlugin
     {
         private static readonly string Key = "memory_usage_metric";
+        private static readonly string Name = "Memory Usage";
         private static readonly string Description = "The amount of memory currently in use by the system.";
         
         private static readonly string WMIQueryString = "SELECT TotalVisibleMemorySize, FreePhysicalMemory FROM Win32_OperatingSystem";
@@ -31,12 +33,14 @@ namespace OSMetricsRetriever.MetricsPlugins
 
             if (memoryInfo["FreePhysicalMemory"] == null)
                 throw new MetricRetrievalException("FreePhysicalMemory property not available");
-
+            
+            if (memoryInfo == null)
+                throw new InvalidOperationException("Unable to retrieve memory information");
 
             var totalMemoryKB = Convert.ToDouble(memoryInfo["TotalVisibleMemorySize"]);
             var freeMemoryKB = Convert.ToDouble(memoryInfo["FreePhysicalMemory"]);
             var usedMemoryKB = totalMemoryKB - freeMemoryKB;
-            
+
 
             // Convert from KB to Bytes
             var usedMemoryBytes = usedMemoryKB * 1024;

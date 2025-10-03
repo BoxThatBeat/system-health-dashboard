@@ -1,6 +1,8 @@
 ﻿using OSMetricsRetriever.Models;
 using OSMetricsRetriever.Exceptions;
 using System.Management;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OSMetricsRetriever.MetricsPlugins
 {
