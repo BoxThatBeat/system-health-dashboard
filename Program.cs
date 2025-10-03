@@ -1,8 +1,12 @@
+using SystemHealthDashboard.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddControllers();
+builder.Services.AddScoped<DummyService>();
 
 var app = builder.Build();
 
@@ -14,11 +18,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/api/hello", () =>
-{
-    return new { message = "Hello from the API!" };
-})
-.WithName("GetHello");
+app.MapControllers();
 
 var summaries = new[]
 {
