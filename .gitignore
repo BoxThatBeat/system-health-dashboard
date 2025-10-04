@@ -31,3 +31,8 @@ yarn-error.log*
 /src/SystemHealthAPI/obj
 /src/SystemHealthAPITests/bin/Debug/net8.0
 /src/SystemHealthAPITests/obj
+/src/OSMetricsRetriever/.vs/
+/src/OSMetricsRetriever/obj
+/src/OSMetricsRetriever/bin/
+/src/OSMetricsRetrieverTests/bin
+/src/OSMetricsRetrieverTests/obj
