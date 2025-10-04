@@ -31,7 +31,8 @@ yarn-error.log*
 /src/SystemHealthAPI/obj
 /src/SystemHealthAPITests/bin/Debug/net8.0
 /src/SystemHealthAPITests/obj
-/src/OSMetricsRetriever/.vs/OSMetricsRetriever
+/src/OSMetricsRetriever/.vs/
 /src/OSMetricsRetriever/obj
-/src/OSMetricsRetriever/.vs/CopilotSnapshots/9B10A91C211452408400F56E86FFAE3E
-/src/OSMetricsRetriever/bin/Debug/net8.0
+/src/OSMetricsRetriever/bin/
+/src/OSMetricsRetrieverTests/bin
+/src/OSMetricsRetrieverTests/obj

@@ -1,6 +1,6 @@
-﻿using OSMetricsRetriever.Models;
+﻿using OSMetricsRetriever.Exceptions;
+using OSMetricsRetriever.Models;
 using System.Management;
-using System.Linq;
 
 namespace OSMetricsRetriever.MetricsPlugins
 {
@@ -10,17 +10,13 @@ namespace OSMetricsRetriever.MetricsPlugins
     public class StorageUsagePlugin : IRetrieveMetricsPlugin
     {
         private static readonly string Key = "storage_usage_metric";
-        private static readonly string Name = "Storage Usage";
         private static readonly string Description = "The amount of storage space currently used on the primary drive.";
         
-        private static readonly string WMIQueryString = "select Size, FreeSpace from Win32_LogicalDisk where DriveType = 3";
+        private static readonly string WMIQueryString = "SELECT Size, FreeSpace FROM Win32_LogicalDisk WHERE DriveType = 3";
+        private readonly ObjectQuery _WMIObjectQuery = new(WMIQueryString);
 
-        private ObjectQuery _WMIObjectQuery;
-
-        public StorageUsagePlugin()
-        {
-            _WMIObjectQuery = new ObjectQuery(WMIQueryString);
-        }
+        /// <inheritdoc/>
+        public static readonly string Name = "Storage Usage";
 
         /// <inheritdoc/>
         public OSMetric GetMetric(ManagementScope scope)
@@ -29,8 +25,8 @@ namespace OSMetricsRetriever.MetricsPlugins
 
             var drives = searcher.Get().Cast<ManagementObject>().ToList();
             
-            if (!drives.Any())
-                throw new InvalidOperationException("Unable to retrieve storage information");
+            if (drives.Count == 0)
+                throw new MetricRetrievalException("Unable to retrieve storage information. No drives were found.");
 
             // Calculate total used and total space across all fixed drives
             double totalSizeBytes = 0;

@@ -5,6 +5,10 @@ VisualStudioVersion = 17.14.36518.9 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSMetricsRetriever", "OSMetricsRetriever.csproj", "{A5D75DF9-B328-4528-9737-D1EAEB580EA5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSMetricsRetrieverTests", "..\OSMetricsRetrieverTests\OSMetricsRetrieverTests.csproj", "{74C65DF5-1961-4E9C-B25B-236DAF3CF2E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{A5D75DF9-B328-4528-9737-D1EAEB580EA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5D75DF9-B328-4528-9737-D1EAEB580EA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5D75DF9-B328-4528-9737-D1EAEB580EA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74C65DF5-1961-4E9C-B25B-236DAF3CF2E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74C65DF5-1961-4E9C-B25B-236DAF3CF2E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74C65DF5-1961-4E9C-B25B-236DAF3CF2E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74C65DF5-1961-4E9C-B25B-236DAF3CF2E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{74C65DF5-1961-4E9C-B25B-236DAF3CF2E9} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3E82B7C1-545C-4EF8-BE18-29FDE3E031DA}

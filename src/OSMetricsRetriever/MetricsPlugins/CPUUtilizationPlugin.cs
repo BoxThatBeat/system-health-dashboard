@@ -4,22 +4,18 @@ using System.Management;
 namespace OSMetricsRetriever.MetricsPlugins
 {
     /// <summary>
-    /// 
+    /// Plugin for retrieving CPU utilization metrics from the operating system.
     /// </summary>
     public class CPUUtilizationPlugin : IRetrieveMetricsPlugin
     {
         private static readonly string Key = "cpu_utilization_metric";
-        private static readonly string Name = "CPU Utilization";
         private static readonly string Description = "The percentage of CPU utilization.";
         
         private static readonly string WMIQueryString = "SELECT LoadPercentage FROM Win32_Processor";
+        private readonly ObjectQuery _WMIObjectQuery = new(WMIQueryString);
 
-        private ObjectQuery _WMIObjectQuery;
-
-        public CPUUtilizationPlugin()
-        {
-            _WMIObjectQuery = new ObjectQuery(WMIQueryString);
-        }
+        /// <inheritdoc/>
+        public static readonly string Name = "CPU Utilization";
 
         /// <inheritdoc/>
         public OSMetric GetMetric(ManagementScope scope)
