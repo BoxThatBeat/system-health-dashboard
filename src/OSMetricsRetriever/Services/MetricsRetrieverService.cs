@@ -24,7 +24,7 @@ namespace OSMetricsRetriever.Services
         {
             var metrics = new List<OSMetric>();
 
-            // initialize a management scope for WMI queries
+            // initilize a management scope for WMI queries
             var scope = new System.Management.ManagementScope(@"\\.\root\cimv2");
             scope.Connect();
 

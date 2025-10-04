@@ -13,18 +13,18 @@ namespace OSMetricsRetriever
         {
             try
             {
-            // Get the url from args or use a default value
+                // Get the url from args or use a default value
                 var apiUrl = args.Length > 0 ? args[0] : "http://localhost:5169/SystemMetrics";
 
                 var systemHealthAPIService = new SystemHealthAPIService(apiUrl);
 
                 var retriever = new MetricsRetrieverService.MetricsReceiverServiceBuilder()
-                .AddPlugin<CPUUtilizationPlugin>()
-                .AddPlugin<MemoryUsagePlugin>()
-                .AddPlugin<StorageUsagePlugin>()
-                .Build();
+                    .AddPlugin<CPUUtilizationPlugin>()
+                    .AddPlugin<MemoryUsagePlugin>()
+                    .AddPlugin<StorageUsagePlugin>()
+                    .Build();
 
-            var collectedMetrics = retriever.CollectMetrics();
+                var collectedMetrics = retriever.CollectMetrics();
 
                 await systemHealthAPIService.SendMetrics(collectedMetrics);
 
@@ -50,7 +50,7 @@ namespace OSMetricsRetriever
         private static void LogError(string message, Exception ex)
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
-
+            
             if (environment.Equals("Production", StringComparison.OrdinalIgnoreCase))
             {
                 // Log to Windows Event Log in production

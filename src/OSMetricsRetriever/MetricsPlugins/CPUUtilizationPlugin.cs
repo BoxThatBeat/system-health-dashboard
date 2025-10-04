@@ -9,7 +9,6 @@ namespace OSMetricsRetriever.MetricsPlugins
     public class CPUUtilizationPlugin : IRetrieveMetricsPlugin
     {
         private static readonly string Key = "cpu_utilization_metric";
-        private static readonly string Name = "CPU Utilization";
         private static readonly string Description = "The percentage of CPU utilization.";
         
         private static readonly string WMIQueryString = "SELECT LoadPercentage FROM Win32_Processor";
