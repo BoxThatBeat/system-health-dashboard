@@ -1,5 +1,6 @@
 ﻿using OSMetricsRetriever.Exceptions;
 using OSMetricsRetriever.Models;
+using OSMetricsRetriever.Providers;
 
 namespace OSMetricsRetriever.Services
 {
@@ -32,7 +33,7 @@ namespace OSMetricsRetriever.Services
             {
                 try
                 {
-                    metrics.Add(plugin.GetMetric(scope));
+                    metrics.Add(plugin.GetMetric(new WMIProvider(scope)));
                 }
                 catch (MetricRetrievalException ex)
                 {

@@ -1,4 +1,5 @@
 ﻿using OSMetricsRetriever.Models;
+using OSMetricsRetriever.Providers;
 using System.Management;
 
 namespace OSMetricsRetriever.MetricsPlugins
@@ -8,22 +9,20 @@ namespace OSMetricsRetriever.MetricsPlugins
     /// </summary>
     public class CPUUtilizationPlugin : IRetrieveMetricsPlugin
     {
+        public static readonly string Name = "CPU Utilization";
+
         private static readonly string Key = "cpu_utilization_metric";
         private static readonly string Description = "The percentage of CPU utilization.";
         
-        private static readonly string WMIQueryString = "SELECT LoadPercentage FROM Win32_Processor";
+        private static readonly string LoadKeyString = "LoadPercentage";
+        private static readonly string WMIQueryString = $"SELECT {LoadKeyString} FROM Win32_Processor";
         private readonly ObjectQuery _WMIObjectQuery = new(WMIQueryString);
 
         /// <inheritdoc/>
-        public static readonly string Name = "CPU Utilization";
-
-        /// <inheritdoc/>
-        public OSMetric GetMetric(ManagementScope scope)
+        public OSMetric GetMetric(IWMIProvider provider)
         {
-            var searcher = new ManagementObjectSearcher(scope, _WMIObjectQuery);
-
-            var averageCpuLoad = searcher.Get().Cast<ManagementObject>()
-                .Select(mo => Convert.ToInt32(mo["LoadPercentage"]))
+            var averageCpuLoad = provider.QueryWMI(_WMIObjectQuery)
+                .Select(managementObject => Convert.ToInt32(managementObject[LoadKeyString]))
                 .Average();
 
             return new OSMetric()

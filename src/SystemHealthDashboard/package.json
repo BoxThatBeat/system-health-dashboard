@@ -1,15 +1,18 @@
 {
-  "name": "frontend",
+  "name": "system-health-dashboard",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
     "start": "ng serve",
+    "local": "ng serve --watch --configuration development",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test --browsers Chrome --watch=true",
+    "test:once": "ng test --watch=false",
+    "test:coverage": "ng test --watch=false --code-coverage",
+    "test:coverage-open": "ng test --watch=false --code-coverage && start coverage/system-health-dashboard/index.html"
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^19.2.0",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
     "@angular/core": "^19.2.0",
@@ -17,6 +20,7 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "ag-charts-angular": "^12.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
@@ -25,6 +29,7 @@
     "@angular-devkit/build-angular": "^19.2.17",
     "@angular/cli": "^19.2.17",
     "@angular/compiler-cli": "^19.2.0",
+    "@ngneat/spectator": "^19.4.1",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.6.0",
     "karma": "~6.4.0",

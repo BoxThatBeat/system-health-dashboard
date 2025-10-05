@@ -1,0 +1,10 @@
+<h1>System Health Dashboard</h1>
+<div class="charts-container">
+  @for (chartOptions of chartOptions(); track $index) {
+    <ag-charts
+        class="chart"
+        [options]="chartOptions"
+      >
+    </ag-charts>
+  }
+</div>

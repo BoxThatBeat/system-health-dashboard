@@ -4,16 +4,16 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using SystemHealthAPI.Models;
 
-namespace SystemHealthAPITests.Integration;
+namespace SystemHealthAPITests;
 
 [TestClass]
-public class SystemMetricsIntegrationTests
+public class IntegrationTests
 {
     private WebApplicationFactory<Program> _factory;
     private HttpClient _client;
     private readonly JsonSerializerOptions _jsonOptions;
 
-    public SystemMetricsIntegrationTests()
+    public IntegrationTests()
     {
         _jsonOptions = new JsonSerializerOptions
         {
