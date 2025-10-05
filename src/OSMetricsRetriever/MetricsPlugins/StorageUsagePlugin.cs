@@ -1,5 +1,6 @@
 ﻿using OSMetricsRetriever.Exceptions;
 using OSMetricsRetriever.Models;
+using OSMetricsRetriever.Providers;
 using System.Management;
 
 namespace OSMetricsRetriever.MetricsPlugins
@@ -9,21 +10,21 @@ namespace OSMetricsRetriever.MetricsPlugins
     /// </summary>
     public class StorageUsagePlugin : IRetrieveMetricsPlugin
     {
+        public static readonly string Name = "Storage Usage";
+
         private static readonly string Key = "storage_usage_metric";
         private static readonly string Description = "The amount of storage space currently used on the primary drive.";
         
-        private static readonly string WMIQueryString = "SELECT Size, FreeSpace FROM Win32_LogicalDisk WHERE DriveType = 3";
+        private static readonly string SizeKeyString = "Size";
+        private static readonly string FreeSpaceKeyString = "FreeSpace";
+        private static readonly string WMIQueryString = $"SELECT {SizeKeyString}, {FreeSpaceKeyString} FROM Win32_LogicalDisk WHERE DriveType = 3";
         private readonly ObjectQuery _WMIObjectQuery = new(WMIQueryString);
 
-        /// <inheritdoc/>
-        public static readonly string Name = "Storage Usage";
 
         /// <inheritdoc/>
-        public OSMetric GetMetric(ManagementScope scope)
+        public OSMetric GetMetric(IWMIProvider provider)
         {
-            var searcher = new ManagementObjectSearcher(scope, _WMIObjectQuery);
-
-            var drives = searcher.Get().Cast<ManagementObject>().ToList();
+            var drives = provider.QueryWMI(_WMIObjectQuery).ToList();
             
             if (drives.Count == 0)
                 throw new MetricRetrievalException("Unable to retrieve storage information. No drives were found.");
@@ -34,8 +35,8 @@ namespace OSMetricsRetriever.MetricsPlugins
 
             foreach (var drive in drives)
             {
-                var driveSize = Convert.ToDouble(drive["Size"]);
-                var freeSpace = Convert.ToDouble(drive["FreeSpace"]);
+                var driveSize = Convert.ToDouble(drive[SizeKeyString]);
+                var freeSpace = Convert.ToDouble(drive[FreeSpaceKeyString]);
                 
                 totalSizeBytes += driveSize;
                 totalFreeBytes += freeSpace;

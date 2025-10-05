@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { catchError, map, Observable } from "rxjs";
+import { catchError, map, Observable, of } from "rxjs";
 import { OSMetric } from "../models/os-metric";
 import { LoggerService } from "./logger.service";
 
@@ -28,7 +28,7 @@ export class SystemHealthApiService {
       })
       .pipe(
         map((responseBody: object) => {
-          if (responseBody?.hasOwnProperty('body') != null) {
+          if (responseBody?.hasOwnProperty('body')) {
             const metrics = (responseBody as any)['body'] as OSMetric[];
             if (metrics) {
               return metrics;
@@ -38,7 +38,7 @@ export class SystemHealthApiService {
         }),
         catchError((error: HttpErrorResponse) => {
           this.loggerService.error('Error retrieving system metrics: ', error.error?.message);
-          return [];
+          return of([]);
         }),
       );
   }

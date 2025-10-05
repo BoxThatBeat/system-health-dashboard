@@ -36,7 +36,7 @@ public class OSMetric()
     /// <summary>
     /// The total possible value for the metric, if applicable. For example, for "CPU Usage", this could be 100 (representing 100%).
     /// </summary>
-    public double? Total { get; set; }
+    public double Total { get; set; }
 
     /// <summary>
     /// What this metric is measured in. E.g. Percentage, Bytes, etc.

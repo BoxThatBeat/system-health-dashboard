@@ -1,5 +1,6 @@
 ﻿using OSMetricsRetriever.Exceptions;
 using OSMetricsRetriever.Models;
+using OSMetricsRetriever.Providers;
 using System.Management;
 
 namespace OSMetricsRetriever.MetricsPlugins
@@ -9,27 +10,26 @@ namespace OSMetricsRetriever.MetricsPlugins
     /// </summary>
     public class MemoryUsagePlugin : IRetrieveMetricsPlugin
     {
+        public static readonly string Name = "Memory Usage";
+
         private static readonly string Key = "memory_usage_metric";
         private static readonly string Description = "The amount of memory currently in use by the system.";
         
-        private static readonly string WMIQueryString = "SELECT TotalVisibleMemorySize, FreePhysicalMemory FROM Win32_OperatingSystem";
+        private static readonly string TotalMemoryKeyString = "TotalVisibleMemorySize";
+        private static readonly string FreeMemoryKeyString = "FreePhysicalMemory";
+        private static readonly string WMIQueryString = $"SELECT {TotalMemoryKeyString}, {FreeMemoryKeyString} FROM Win32_OperatingSystem";
         private readonly ObjectQuery _WMIObjectQuery = new(WMIQueryString);
 
         /// <inheritdoc/>
-        public static readonly string Name = "Memory Usage";
-
-        /// <inheritdoc/>
-        public OSMetric GetMetric(ManagementScope scope)
+        public OSMetric GetMetric(IWMIProvider provider)
         {
-            var searcher = new ManagementObjectSearcher(scope, _WMIObjectQuery);
-
-            var memoryInfo = searcher.Get().Cast<ManagementObject>().FirstOrDefault() ?? throw new MetricRetrievalException("Unable to retrieve memory information");
+            var memoryInfo = provider.QueryWMI(_WMIObjectQuery).FirstOrDefault() ?? throw new MetricRetrievalException("Unable to retrieve memory information");
 
             // Validate that the required properties are available
-            if (memoryInfo["TotalVisibleMemorySize"] == null)
+            if (memoryInfo[TotalMemoryKeyString] == null)
                 throw new MetricRetrievalException("TotalVisibleMemorySize property not available");
 
-            if (memoryInfo["FreePhysicalMemory"] == null)
+            if (memoryInfo[FreeMemoryKeyString] == null)
                 throw new MetricRetrievalException("FreePhysicalMemory property not available");
 
 

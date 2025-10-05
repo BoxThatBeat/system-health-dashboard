@@ -21,7 +21,7 @@ export interface OSMetric {
   value: number,
 
   /** The total possible value for the metric, if applicable. For example, for "CPU Usage", this could be 100 (representing 100%). */
-  total?: number,
+  total: number,
 
   /** What this metric is measured in. E.g. Percentage, Bytes, etc. */
   unit: MeasurementUnit

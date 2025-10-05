@@ -10,8 +10,8 @@ namespace SystemHealthAPITests.Controllers;
 [TestClass]
 public class SystemMetricsControllerTests
 {
-    private Mock<ISystemMetricsService> _mockSystemMetricsService;
     private SystemMetricsController _controller;
+    private Mock<ISystemMetricsService> _mockSystemMetricsService;
 
     [TestInitialize]
     public void Setup()

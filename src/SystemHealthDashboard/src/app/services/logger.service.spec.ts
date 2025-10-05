@@ -148,20 +148,4 @@ describe('LoggerService', () => {
       expect(console.error).toHaveBeenCalledWith('[ERROR]', message);
     });
   });
-
-  describe('integration tests', () => {
-    it('should be able to call multiple logging methods in sequence', () => {
-      const infoSpy = spyOn(console, 'info');
-      const warnSpy = spyOn(console, 'warn');
-      const errorSpy = spyOn(console, 'error');
-
-      service.info('Info message');
-      service.warn('Warn message');
-      service.error('Error message');
-
-      expect(infoSpy).toHaveBeenCalledWith('[INFO]', 'Info message');
-      expect(warnSpy).toHaveBeenCalledWith('[WARN]', 'Warn message');
-      expect(errorSpy).toHaveBeenCalledWith('[ERROR]', 'Error message');
-    });
-  });
 });

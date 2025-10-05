@@ -1,14 +1,16 @@
 import { ChartType } from "../models/chart-type.enum";
-import { AgChartOptions } from 'ag-charts-community';
 import { MeasurementUnit } from "../models/measurement-unit.enum";
 
+/**
+ * A mapping of MeasurementUnit enum values to their string representations for chart labeling.
+ */
 export const measurementUnitMap = new Map<MeasurementUnit, string>([
   [MeasurementUnit.Percentage, "%"],
-  [MeasurementUnit.Bytes, "Bytes"],
+  [MeasurementUnit.Bytes, "GB"],
 ]);
 
 /**
- * Configuration map for different chart types. Additional 
+ * Configuration map for different chart types.
  */
 export const chartTypesConfigMap = new Map<ChartType, any>([
   [ChartType.Line, {
