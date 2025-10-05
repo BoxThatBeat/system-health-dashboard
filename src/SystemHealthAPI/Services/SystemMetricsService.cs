@@ -30,5 +30,10 @@ namespace SystemHealthAPI.Services
         {
             return await _dataAccessService.RetrieveAllMetricsAsync();
         }
+
+        public async Task<bool> ClearAllMetricsAsync()
+        {
+            return await _dataAccessService.ClearAllMetricsAsync();
+        }
     }
 }

@@ -1,5 +1,5 @@
 import { Component, inject, signal } from "@angular/core";
-import { of, Subscription, switchMap } from "rxjs";
+import { Subscription } from "rxjs";
 import { OSMetric } from "../../models/os-metric";
 import { SystemHealthApiService } from "../../services/system-health-api.service";
 import { AgCharts } from "ag-charts-angular";
@@ -30,20 +30,36 @@ export class DashboardComponent {
     this.retrieveOSMetrics();
   }
 
+  /**
+   * Refreshes the metrics by re-fetching from the API and updating the charts.
+   */
+  public refreshMetrics() {
+    this.retrieveOSMetrics();
+  }
+
+  /**
+   * Deletes all metrics via the API and clears the charts.
+   */
+  public deleteMetrics() {
+    this.subscriptions.add(
+      this.systemHealthApiService
+        .deleteMetrics()
+        .subscribe(() => this.chartOptions.set([]))
+    );
+  }
+
   private retrieveOSMetrics() {
     this.subscriptions.add(
       this.systemHealthApiService
         .getMetrics()
-        .pipe(
-          switchMap(async (metrics: OSMetric[]) => {
-            this.setupCharts(metrics);
-            return of(null);
-          }),
-        )
-        .subscribe());
+        .subscribe(metrics => this.setupCharts(metrics))
+    );
   }
 
   private setupCharts(metrics: OSMetric[]) {
+
+    // clear existing charts
+    this.chartOptions.set([]);
 
     // Get list of unique metric keys
     const uniqueMetricKeys = new Set(metrics.map(m => m.key));

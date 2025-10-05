@@ -106,4 +106,56 @@ describe('SystemHealthApiService', () => {
       req.flush(null, { status: 200, statusText: 'OK' });
     });
   });
+
+  describe('deleteMetrics', () => {
+    it('should handle successful deletion', (done) => {
+      service.deleteMetrics().subscribe({
+        next: (result) => {
+          expect(result).toBeNull();
+          done();
+        },
+        error: (error) => {
+          fail('Should not have failed: ' + error);
+          done();
+        }
+      });
+
+      const req = mockHttpClient.expectOne('http://localhost:5169/SystemMetrics');
+      req.flush(null, { status: 204, statusText: 'No Content' });
+    });
+
+    it('should log error and return undefined when delete fails', (done) => {
+      service.deleteMetrics().subscribe({
+        next: (result) => {
+          expect(result).toBeUndefined();
+          expect(loggerService.error).toHaveBeenCalledWith('Error deleting system metrics: ', undefined);
+          done();
+        },
+        error: (error) => {
+          fail('Should not have failed: ' + error);
+          done();
+        }
+      });
+
+      const req = mockHttpClient.expectOne('http://localhost:5169/SystemMetrics');
+      req.error(new ProgressEvent('error'), { status: 500, statusText: 'Internal Server Error' });
+    });
+
+    it('should handle delete with error response body', (done) => {
+      service.deleteMetrics().subscribe({
+        next: (result) => {
+          expect(result).toBeUndefined();
+          expect(loggerService.error).toHaveBeenCalledWith('Error deleting system metrics: ', 'Failed to delete metrics');
+          done();
+        },
+        error: (error) => {
+          fail('Should not have failed: ' + error);
+          done();
+        }
+      });
+
+      const req = mockHttpClient.expectOne('http://localhost:5169/SystemMetrics');
+      req.flush({ message: 'Failed to delete metrics' }, { status: 400, statusText: 'Bad Request' });
+    });
+  });
 });

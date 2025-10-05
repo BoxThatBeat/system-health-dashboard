@@ -3,6 +3,21 @@ h1 {
   margin-bottom: 2rem;
 }
 
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
 .charts-container {
   display: flex;
   gap: 5rem;
@@ -14,4 +29,10 @@ h1 {
     width: 100%;
     height: 100%;
   }
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }

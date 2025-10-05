@@ -53,7 +53,21 @@ public class SystemMetricsController : ControllerBase
         }
         else
         {
-            return StatusCode(500, "An error occurred while adding metrics.");
+            return StatusCode(500, "An unexpected error occurred while adding metrics.");
+        }
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> DeleteAll()
+    {
+        bool result = await _systemMetricsService.ClearAllMetricsAsync();
+        if (result)
+        {
+            return NoContent();
+        }
+        else
+        {
+            return StatusCode(500, "An unexpected error occurred while deleting metrics.");
         }
     }
 }

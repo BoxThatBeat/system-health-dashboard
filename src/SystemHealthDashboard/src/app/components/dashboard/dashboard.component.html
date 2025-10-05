@@ -1,5 +1,8 @@
 <h1>System Health Dashboard</h1>
 <div class="charts-container">
+  @if (chartOptions().length === 0) {
+    <p>No metrics available. Please refresh metrics.</p>
+  }
   @for (chartOptions of chartOptions(); track $index) {
     <ag-charts
         class="chart"
@@ -7,4 +10,8 @@
       >
     </ag-charts>
   }
+</div>
+<div class="buttons-container">
+  <button class="dashboard-button" (click)="refreshMetrics()">Refresh Metrics</button>
+  <button class="dashboard-button" (click)="deleteMetrics()">Delete Metrics</button>
 </div>

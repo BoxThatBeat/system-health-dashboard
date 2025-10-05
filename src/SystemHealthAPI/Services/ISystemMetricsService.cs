@@ -19,5 +19,11 @@ namespace SystemHealthAPI.Services
         /// </summary>
         /// <returns>A task that represents the asynchronous operation. The task result contains a list of system metrics.</returns>
         Task<IEnumerable<OSMetric>> RetrieveAllMetricsAsync();
+
+        /// <summary>
+        /// Clears all stored system metrics.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation. The task result represents whether the operation was successful or not.</returns>
+        Task<bool> ClearAllMetricsAsync();
     }
 }

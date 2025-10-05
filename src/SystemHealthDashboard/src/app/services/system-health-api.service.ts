@@ -42,4 +42,19 @@ export class SystemHealthApiService {
         }),
       );
   }
+
+  /**
+   * Deletes all system metrics.
+   * @returns An observable that completes when the delete operation is done.
+   */
+  public deleteMetrics(): Observable<void> {
+    return this.httpClient
+      .delete<void>(this.endpointUrl)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          this.loggerService.error('Error deleting system metrics: ', error.error?.message);
+          return of(undefined);
+        }),
+      );
+  }
 }
