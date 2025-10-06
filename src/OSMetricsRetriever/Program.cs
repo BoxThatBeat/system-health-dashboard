@@ -1,9 +1,11 @@
 ﻿using OSMetricsRetriever.MetricsPlugins;
 using OSMetricsRetriever.Services;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OSMetricsRetriever
 {
+    [ExcludeFromCodeCoverage]
     public class Program
     {
         private static readonly string ApplicationName = "OSMetricsRetriever";
