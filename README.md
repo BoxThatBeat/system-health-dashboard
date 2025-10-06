@@ -218,5 +218,18 @@ Implement IRetrieveMetricsPlugin in the rest of the plugins, using CPUUtilizatio
 Frontend:
 <img width="2559" height="353" alt="Pasted image 20251005193832" src="https://github.com/user-attachments/assets/0f6a0034-92ad-4d41-a840-0d905e521942" />
 
-Backend: high coverage, (was not able to get a code coverage tool working for .NET)
+Backend: 
+To generate HTML code coverage reports for the .NET test projects, run:
+- **Linux/Mac**: `./generate-code-coverage.sh`
+- **Windows**: `generate-code-coverage.bat`
+
+The scripts will:
+1. Run tests with code coverage for `SystemHealthAPITests` and `OSMetricsRetrieverTests` (Windows only)
+2. Generate HTML reports in the `coverage-reports/` directory
+3. Output the location of the HTML reports to open in your browser
+
+**Prerequisites**: 
+- Install ReportGenerator tool: `dotnet tool install --global dotnet-reportgenerator-globaltool`
+
+The test projects use MSTest with the `Microsoft.Testing.Extensions.CodeCoverage` package to collect coverage data in Cobertura format, which is then converted to HTML using ReportGenerator.
 

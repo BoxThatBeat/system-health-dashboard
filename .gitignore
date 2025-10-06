@@ -7,7 +7,7 @@ yarn-error.log*
 /src/SystemHealthAPI/.vs
 /src/SystemHealthAPI/bin
 /src/SystemHealthAPI/obj
-/src/SystemHealthAPITests/bin/Debug/net8.0
+/src/SystemHealthAPITests/bin
 /src/SystemHealthAPITests/obj
 /src/OSMetricsRetriever/.vs/
 /src/OSMetricsRetriever/obj
@@ -15,6 +15,10 @@ yarn-error.log*
 /src/OSMetricsRetriever/publish/
 /src/OSMetricsRetrieverTests/bin
 /src/OSMetricsRetrieverTests/obj
+
+# Code Coverage
+coverage-reports/
+TestResults/
 
 # IDE
 .vscode/
