@@ -1,7 +1,9 @@
 # Angular / Frontend
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+/src/SystemHealthDashboard/.vs
+/src/SystemHealthDashboard/.angular
+/src/SystemHealthDashboard/coverage/
+/src/SystemHealthDashboard/dist/
+/src/SystemHealthDashboard/node_modules/
 
 # .NET / Backend
 /src/SystemHealthAPI/.vs
