@@ -3,6 +3,7 @@ import { inject, Injectable } from "@angular/core";
 import { catchError, map, Observable, of } from "rxjs";
 import { OSMetric } from "../models/os-metric";
 import { LoggerService } from "./logger.service";
+import { environment } from "../../environments/environment";
 
 /**
  * A service to interact with the System Health API.
@@ -15,7 +16,7 @@ export class SystemHealthApiService {
   private readonly httpClient = inject(HttpClient);
   private readonly loggerService = inject(LoggerService);
 
-  private readonly endpointUrl = 'http://localhost:8080/SystemMetrics';
+  private readonly endpointUrl = `${environment.apiUrl}/SystemMetrics`;
 
   /**
    * Retrieves OS metrics from the API.

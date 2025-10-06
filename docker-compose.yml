@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  # Angular Frontend
+  frontend:
+    build:
+      context: ./src/SystemHealthDashboard
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
+    environment:
+      - NODE_ENV=production
+    networks:
+      - system-health-network
+
+  # .NET API
+  api:
+    build:
+      context: ./src/SystemHealthAPI
+      dockerfile: Dockerfile
+    ports:
+      - "5169:5169"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:5169
+    networks:
+      - system-health-network
+
+networks:
+  system-health-network:
+    driver: bridge
