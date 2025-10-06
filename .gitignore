@@ -12,6 +12,7 @@ yarn-error.log*
 /src/OSMetricsRetriever/.vs/
 /src/OSMetricsRetriever/obj
 /src/OSMetricsRetriever/bin/
+/src/OSMetricsRetriever/publish/
 /src/OSMetricsRetrieverTests/bin
 /src/OSMetricsRetrieverTests/obj
 

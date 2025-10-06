@@ -117,7 +117,7 @@ public class SystemMetricsControllerTests
         // Assert
         Assert.IsNotNull(result);
         Assert.AreEqual(500, result.StatusCode);
-        Assert.AreEqual("An error occurred while adding metrics.", result.Value);
+        Assert.AreEqual("An unexpected error occurred while adding metrics.", result.Value);
     }
 
     [TestMethod]

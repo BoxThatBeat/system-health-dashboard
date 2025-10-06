@@ -1,0 +1,28 @@
+# Docker ignore file to exclude unnecessary files from the build context
+**/bin/
+**/obj/
+**/.vs/
+**/.vscode/
+**/.git/
+**/.gitignore
+**/Dockerfile*
+**/docker-compose*
+**/README.md
+**/.env
+**/coverage/
+**/node_modules/
+
+# Solution files (build individual projects instead)
+**/*.sln
+
+# Test projects
+**/*Tests/
+**/*.Tests/
+
+# Logs
+**/logs/
+**/*.log
+
+# Temporary files
+**/tmp/
+**/temp/

@@ -15,7 +15,7 @@ export class SystemHealthApiService {
   private readonly httpClient = inject(HttpClient);
   private readonly loggerService = inject(LoggerService);
 
-  private readonly endpointUrl = 'http://localhost:5169/SystemMetrics';
+  private readonly endpointUrl = 'http://localhost:8080/SystemMetrics';
 
   /**
    * Retrieves OS metrics from the API.

@@ -14,7 +14,7 @@ namespace OSMetricsRetriever
             try
             {
                 // Get the url from args or use a default value
-                var apiUrl = args.Length > 0 ? args[0] : "http://localhost:5169/SystemMetrics";
+                var apiUrl = args.Length > 0 ? args[0] : "http://localhost:8080/SystemMetrics";
 
                 var systemHealthAPIService = new SystemHealthAPIService(apiUrl);
 
